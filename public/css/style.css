@@ -35,3 +35,24 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+.another-layout {
+  background-color: #ffffcc;
+  padding: 10px;
+}
+
+.action-content {
+  background-color: #ccffcc;
+  padding: 10px;
+}
+
+.another-action-content {
+  background-color: #ccffff;
+  padding: 10px;
+}
+
+.comments-content {
+  background-color: #00ffff;
+  padding: 10px;
+}
+
