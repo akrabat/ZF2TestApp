@@ -12,6 +12,13 @@ class IndexController extends ActionController
         $result = new ViewModel();
         return $result;
     }
+    
+    public function nolayoutAction()
+    {
+        $result = new ViewModel();
+        $result->setTerminal(true);
+        return $result;
+    }
 
     public function respondAction()
     {

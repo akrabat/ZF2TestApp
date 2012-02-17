@@ -51,7 +51,7 @@ return array(
             ),
             'Zend\View\Renderer\PhpRenderer' => array(
                 'parameters' => array(
-                    'renderTrees' => true,
+                    'renderTrees' => false,
                     'resolver' => 'Zend\View\Resolver\TemplatePathStack',
                     'broker'   => 'Zend\View\HelperBroker',
                 ),
