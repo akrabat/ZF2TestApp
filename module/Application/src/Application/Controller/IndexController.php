@@ -47,6 +47,11 @@ class IndexController extends ActionController
         $comments->setCaptureTo('child-comments');
         $result->addChild($comments);
 
+        $comments = new ViewModel();
+        $comments->setTemplate('index/another-child');
+        $comments->setCaptureTo('another-child');
+        $result->addChild($comments);
+
         return $result;
     }
 
