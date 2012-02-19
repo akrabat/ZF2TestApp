@@ -20,6 +20,21 @@ class IndexController extends ActionController
         return $result;
     }
 
+    public function addAnotherViewModelToLayoutAction()
+    {
+        // Alternative layout
+        $this->layout()->setLayout('layout/another');
+
+        $sidebar = new ViewModel();
+        $sidebar->setTemplate('layout/sidebar_one');
+        $sidebar->setCaptureTo('sidebar');
+
+        $e = $this->getEvent();
+        $e->getViewModel()->addChild($sidebar);
+
+        return new ViewModel();
+    }
+
     public function respondAction()
     {
         $response = $this->getResponse();
@@ -30,8 +45,9 @@ class IndexController extends ActionController
     function alternateAction()
     {
         // Alternative layout
-        $e = $this->getEvent();
-        $e->getViewModel()->setTemplate('layout/another');
+        $this->layout('layout/another');
+        // $e = $this->getEvent();
+        // $e->getViewModel()->setTemplate('layout/another');
 
         $sidebar = new ViewModel();
         $sidebar->setTemplate('layout/sidebar_one');

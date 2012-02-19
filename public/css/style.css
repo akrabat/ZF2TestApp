@@ -36,23 +36,42 @@ div.container a.brand {
     padding: 8px 20px 12px 40px;
 }
 
+.body {
+  margin-top: 60px;
+}
+
 .another-layout {
   background-color: #ffffcc;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .action-content {
   background-color: #ccffcc;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .another-action-content {
   background-color: #ccffff;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .comments-content {
   background-color: #00ffff;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
+.sidebar-one-content {
+  background-color: #ddddbb;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.another-child-content {
+  background-color: #00dddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}

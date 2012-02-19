@@ -23,7 +23,7 @@ echo $this->doctype();
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <?php echo $this->headTitle('ZF2 Skeleton Application') ?>
+    <?php echo $this->headTitle('ZF2 Test Application') ?>
 
     <?php echo $this->headMeta() ?>
 
@@ -35,7 +35,7 @@ echo $this->doctype();
 
   </head>
 
-  <body>
+  <body class="another-layout">
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -46,7 +46,7 @@ echo $this->doctype();
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<?php echo $this->url('default') ?>">Skeleton Application</a>
+          <a class="brand" href="<?php echo $this->url('default') ?>">Test Application: Another Layout</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="<?php echo $this->url('default') ?>">Home</a></li>
@@ -56,8 +56,7 @@ echo $this->doctype();
       </div>
     </div>
 
-    <div class="another-layout container">
-      <p>(This is layout/another.phtml)</p>
+    <div class="container body">
 
 
       <?php echo $this->renderChildModel('content'); ?>
