@@ -22,6 +22,7 @@ return array(
         'instance' => array(
             'alias' => array(
                 'index' => 'Application\Controller\IndexController',
+                'view' => 'Application\Controller\ViewController',
                 'error' => 'Application\Controller\ErrorController',
             ),
 
@@ -81,12 +82,27 @@ return array(
                         'default' => array(
                             'type'    => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(
-                                'route'    => '/[:action]',
+                                'route'    => '/[:controller[/:action]]',
                                 'constraints' => array(
                                     'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
                                     'controller' => 'index',
+                                    'action'     => 'index',
+                                ),
+                            ),
+                        ),
+
+                        // Route to view controller
+                        'view' => array(
+                            'type'    => 'Zend\Mvc\Router\Http\Segment',
+                            'options' => array(
+                                'route'    => '/view[/:action]',
+                                'constraints' => array(
+                                    'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                ),
+                                'defaults' => array(
+                                    'controller' => 'view',
                                     'action'     => 'index',
                                 ),
                             ),
