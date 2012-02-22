@@ -7,12 +7,10 @@ return array(
 
         'definition' => array(
             'class' => array(
-                'Zend\View\Renderer\PhpRenderer' => array(
-                    'setResolver' => array(
-                        'resolver' => array(
-                            'required' => false,
-                            'type'     => 'Zend\View\Resolver',
-                        ),
+                'Zend\Mvc\Router\RouteStack' => array(
+                    'instantiator' => array(
+                        'Zend\Mvc\Router\Http\TreeRouteStack',
+                        'factory'
                     ),
                 ),
             ),
