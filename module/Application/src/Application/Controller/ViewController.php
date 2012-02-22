@@ -33,7 +33,7 @@ class ViewController extends ActionController
     public function differentLayoutAction()
     {
         // Use a different layout
-        $this->layout()->setLayout('layout/different');
+        $this->layout('layout/different');
         
         return new ViewModel();
     }
@@ -50,15 +50,13 @@ class ViewController extends ActionController
     public function addAnotherViewModelToLayoutAction()
     {
         // Use an alternative layout
-        $this->layout()->setLayout('layout/another');
+        $layoutViewModel = $this->layout();
+        $layoutViewModel->setTemplate('layout/another');
 
         // add an additional layout to the root view model (layout)
         $sidebar = new ViewModel();
         $sidebar->setTemplate('layout/footer_one');
-        $sidebar->setCaptureTo('footer');
-
-        $e = $this->getEvent();
-        $e->getViewModel()->addChild($sidebar);
+        $layoutViewModel->addChild($sidebar, 'footer');
 
         return new ViewModel();
     }
@@ -66,28 +64,24 @@ class ViewController extends ActionController
     function multipleViewModelsAction()
     {
         // Alternative layout
-        //$this->layout('layout/another');
-        $this->layout()->setLayout('layout/another');
+        $layoutViewModel = $this->layout();
+        $layoutViewModel->setTemplate('layout/another');
 
         $sidebar = new ViewModel();
         $sidebar->setTemplate('layout/footer_one');
-        $sidebar->setCaptureTo('footer');
-        $e = $this->getEvent();
-        $e->getViewModel()->addChild($sidebar);
+        $layoutViewModel->addChild($sidebar, 'footer');
 
-
+        // set up action view model and associated child view models
         $result = new ViewModel();
         $result->setTemplate('view/another-action');
 
         $comments = new ViewModel();
         $comments->setTemplate('view/child-comments');
-        $comments->setCaptureTo('child-comments');
-        $result->addChild($comments);
+        $result->addChild($comments, 'child-comments');
 
         $comments = new ViewModel();
         $comments->setTemplate('view/another-child');
-        $comments->setCaptureTo('another-child');
-        $result->addChild($comments);
+        $result->addChild($comments, 'another-child');
 
         return $result;
     }
