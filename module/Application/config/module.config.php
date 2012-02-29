@@ -84,17 +84,22 @@ return array(
                                     'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
-                                    'controller' => 'Application\Controller\IndexController',
+                                    'controller' => 'index',
                                     'action'     => 'index',
                                 ),
                             ),
                         ),
-                        'home' => array(
-                            'type' => 'Zend\Mvc\Router\Http\Literal',
+                        
+                        // Route to view controller
+                        'view' => array(
+                            'type'    => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(
-                                'route'    => '/',
+                                'route'    => '/view[/:action]',
+                                'constraints' => array(
+                                    'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                ),
                                 'defaults' => array(
-                                    'controller' => 'Application\Controller\IndexController',
+                                    'controller' => 'view',
                                     'action'     => 'index',
                                 ),
                             ),
