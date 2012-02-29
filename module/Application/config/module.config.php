@@ -27,48 +27,47 @@ return array(
             // Inject the plugin broker for controller plugins into
             // the action controller for use by all controllers that
             // extend it.
-            'Zend\Mvc\Controller\ActionController' => array(
-                'parameters' => array(
-                    'broker'       => 'Zend\Mvc\Controller\PluginBroker',
+            'Zend\View\Resolver\AggregateResolver' => array(
+                'injections' => array(
+                    'Zend\View\Resolver\TemplateMapResolver',
+                    'Zend\View\Resolver\TemplatePathStack',
                 ),
             ),
-            'Zend\Mvc\Controller\PluginBroker' => array(
+            'Zend\View\Resolver\TemplateMapResolver' => array(
                 'parameters' => array(
-                    'loader' => 'Zend\Mvc\Controller\PluginLoader',
+                    'map'  => array(
+                        'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+                    ),
                 ),
             ),
-
-            // Set up the view layer.
             'Zend\View\Resolver\TemplatePathStack' => array(
                 'parameters' => array(
-                    'options'  => array(
-                        'script_paths' => array(
-                            'application' => __DIR__ . '/../view',
-                        ),
+                    'paths'  => array(
+                        'application' => __DIR__ . '/../view',
                     ),
                 ),
             ),
             'Zend\View\Renderer\PhpRenderer' => array(
                 'parameters' => array(
-                    'renderTrees' => false,
-                    'resolver' => 'Zend\View\Resolver\TemplatePathStack',
-                    'broker'   => 'Zend\View\HelperBroker',
+                    'resolver' => 'Zend\View\Resolver\AggregateResolver',
                 ),
             ),
             'Zend\Mvc\View\DefaultRenderingStrategy' => array(
                 'parameters' => array(
-                    'baseTemplate' => 'layout/layout.phtml',
+                    'layoutTemplate' => 'layout/layout',
                 ),
             ),
             'Zend\Mvc\View\ExceptionStrategy' => array(
                 'parameters' => array(
                     'displayExceptions' => true,
-                    'template'     => 'error/index.phtml',
+                    'exceptionTemplate' => 'error/index',
                 ),
             ),
             'Zend\Mvc\View\RouteNotFoundStrategy' => array(
                 'parameters' => array(
-                    'notFoundTemplate' => 'error/404.phtml',
+                    'displayNotFoundReason' => true,
+                    'displayExceptions'     => true,
+                    'notFoundTemplate'      => 'error/404',
                 ),
             ),
 
@@ -76,31 +75,26 @@ return array(
             'Zend\Mvc\Router\RouteStack' => array(
                 'parameters' => array(
                     'routes' => array(
-                        // by default route to actions in IndexController
                         'default' => array(
                             'type'    => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(
                                 'route'    => '/[:controller[/:action]]',
                                 'constraints' => array(
+                                    'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                     'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
-                                    'controller' => 'index',
+                                    'controller' => 'Application\Controller\IndexController',
                                     'action'     => 'index',
                                 ),
                             ),
                         ),
-
-                        // Route to view controller
-                        'view' => array(
-                            'type'    => 'Zend\Mvc\Router\Http\Segment',
+                        'home' => array(
+                            'type' => 'Zend\Mvc\Router\Http\Literal',
                             'options' => array(
-                                'route'    => '/view[/:action]',
-                                'constraints' => array(
-                                    'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                ),
+                                'route'    => '/',
                                 'defaults' => array(
-                                    'controller' => 'view',
+                                    'controller' => 'Application\Controller\IndexController',
                                     'action'     => 'index',
                                 ),
                             ),

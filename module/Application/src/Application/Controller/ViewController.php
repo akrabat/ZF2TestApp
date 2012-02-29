@@ -77,11 +77,11 @@ class ViewController extends ActionController
 
         $comments = new ViewModel();
         $comments->setTemplate('view/child-comments');
-        $result->addChild($comments, 'child-comments');
+        $result->addChild($comments, 'child_comments');
 
         $comments = new ViewModel();
         $comments->setTemplate('view/another-child');
-        $result->addChild($comments, 'another-child');
+        $result->addChild($comments, 'another_child');
 
         return $result;
     }
