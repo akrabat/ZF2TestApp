@@ -52,7 +52,7 @@ class Module implements AutoloaderProvider
 
         // Set the layout template for every eco
         $viewModel = $e->getViewModel();
-        $viewModel->setTemplate('simpleLayout');        
+        $viewModel->setTemplate('layout/simple');
     }
 
 

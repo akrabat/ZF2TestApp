@@ -1,7 +1,5 @@
 <?php
 return array(
-    'view' => array(),
-    
     // DI setup 
     'di' => array(
         'instance' => array(
@@ -26,7 +24,7 @@ return array(
                                     'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
-                                    'controller' => 'Simple\Controller\IndexController',
+                                    'controller' => 'Simple\Controller\SimpleController',
                                     'action'     => 'index',
                                 ),
                             ),
