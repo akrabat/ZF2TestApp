@@ -18,11 +18,6 @@ return array(
 
 
         'instance' => array(
-            'alias' => array(
-                'index' => 'Application\Controller\IndexController',
-                'view' => 'Application\Controller\ViewController',
-                'error' => 'Application\Controller\ErrorController',
-            ),
 
             // Inject the plugin broker for controller plugins into
             // the action controller for use by all controllers that
@@ -84,12 +79,23 @@ return array(
                                     'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
-                                    'controller' => 'index',
+                                    'controller' => 'Application\Controller\IndexController',
                                     'action'     => 'index',
                                 ),
                             ),
                         ),
                         
+                        'home' => array(
+                            'type' => 'Zend\Mvc\Router\Http\Literal',
+                            'options' => array(
+                                'route'    => '/',
+                                'defaults' => array(
+                                    'controller' => 'Application\Controller\IndexController',
+                                    'action'     => 'index',
+                                ),
+                            ),
+                        ),
+
                         // Route to view controller
                         'view' => array(
                             'type'    => 'Zend\Mvc\Router\Http\Segment',
@@ -99,7 +105,7 @@ return array(
                                     'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
-                                    'controller' => 'view',
+                                    'controller' => 'Application\Controller\ViewController',
                                     'action'     => 'index',
                                 ),
                             ),
