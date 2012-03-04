@@ -3,6 +3,7 @@
 namespace Simple;
 
 use Zend\Module\Manager,
+    Zend\EventManager\Event,
     Zend\EventManager\StaticEventManager,
     Zend\Module\Consumer\AutoloaderProvider;
 
@@ -33,7 +34,7 @@ class Module implements AutoloaderProvider
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function onBootstrap($e)
+    public function onBootstrap(Event $e)
     {
         $app = $e->getParam('application');
         $app->events()->attach('dispatch', array($this, 'onDispatch'), -100);
@@ -48,12 +49,11 @@ class Module implements AutoloaderProvider
             return;
         }
 
-        // Do module specific boostrapping here
+        // Do module specific bootstrapping here
 
-        // Set the layout template for every eco
+        // Set the layout template for every action in this module
         $viewModel = $e->getViewModel();
         $viewModel->setTemplate('layout/simple');
     }
-
 
 }
