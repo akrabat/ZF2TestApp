@@ -21,7 +21,6 @@ Multiple view models:
         Add an additional view model to layout</a></li>
     <li><a href="<?php echo $this->url('view', array('action'=>'multipleViewModels'));?>">
         Multiple view models</a></li>
-    
 </ul>
 
 
@@ -32,12 +31,21 @@ Response:
 </ul>
 
 
+Change the layout for every action within a module:
+<ul>
+    <li><a href="<?php echo $this->url('simple');?>">Simple module's index action</a></li>
+    <li><a href="<?php echo $this->url('simple', array('action'=>'another'));?>">Simple module's another action</a></li>
+</ul>
+
 <h2>Source code</h2>
 <p>The source code is on <a href="https://github.com/akrabat/ZF2TestApp/tree/master/module/Application">GitHub</a></p>
+
 <ul>
     <li><a href="https://github.com/akrabat/ZF2TestApp/blob/master/module/Application/src/Application/Controller/ViewController.php">ViewController.php</a></li>
     <li><a href="https://github.com/akrabat/ZF2TestApp/tree/master/module/Application/view/view">View scripts</a></li>
     <li><a href="https://github.com/akrabat/ZF2TestApp/tree/master/module/Application/view/layout">Layouts</a></li>
+    <li><a href="https://github.com/akrabat/ZF2TestApp/tree/master/module/Simple/Module.php">Simple module's Module.php</a></li>
 </ul>
+
 
 </div>

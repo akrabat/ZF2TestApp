@@ -12,4 +12,8 @@ class SimpleController extends ActionController
         return array();
     }
 
+    public function anotherAction()
+    {
+        return array();
+    }
 }
