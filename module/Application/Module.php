@@ -12,6 +12,7 @@ class Module implements AutoloaderProvider
     {
         $events = StaticEventManager::getInstance();
         $events->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
+        $events->attach('bootstrap', 'bootstrap', array($this, 'onBootstrap'));
     }
 
     public function getAutoloaderConfig()
@@ -33,6 +34,13 @@ class Module implements AutoloaderProvider
         return include __DIR__ . '/config/module.config.php';
     }
     
+    public function onBootstrap($e)
+    {
+        $application = $e->getParam('application');
+        $application->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+
+    }
+
     public function initializeView($e)
     {
         $application  = $e->getParam('application');
@@ -56,6 +64,17 @@ class Module implements AutoloaderProvider
             $container->{$var} = $value;
         }
     }
+
+    public function registerJsonStrategy($e)
+    {
+        $application  = $e->getTarget();
+        $locator      = $application->getLocator();
+        $view         = $locator->get('Zend\View\View');
+        $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
+
+        // Attach strategy, which is a listener aggregate, at high priority
+        $view->events()->attach($jsonStrategy, 100);
+    }    
 
 
 }

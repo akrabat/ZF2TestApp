@@ -110,6 +110,21 @@ return array(
                                 ),
                             ),
                         ),
+
+                        // Route to json controller
+                        'json' => array(
+                            'type'    => 'Zend\Mvc\Router\Http\Segment',
+                            'options' => array(
+                                'route'    => '/json[/:action]',
+                                'constraints' => array(
+                                    'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                ),
+                                'defaults' => array(
+                                    'controller' => 'Application\Controller\JsonController',
+                                    'action'     => 'index',
+                                ),
+                            ),
+                        ),
                     ),
                 ),
             ),
