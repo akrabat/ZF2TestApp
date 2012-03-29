@@ -81,6 +81,7 @@ return array(
                                 'defaults' => array(
                                     'controller' => 'Application\Controller\IndexController',
                                     'action'     => 'index',
+                                    'is_home'     => 'no',
                                 ),
                             ),
                         ),
@@ -92,6 +93,7 @@ return array(
                                 'defaults' => array(
                                     'controller' => 'Application\Controller\IndexController',
                                     'action'     => 'index',
+                                    'is_home'     => 'yes',
                                 ),
                             ),
                         ),

@@ -1,0 +1,11 @@
+<?php if ($success): ?>
+
+<h2>Results</h2>
+
+<ul>
+<?php foreach ($results as $row): ?>
+    <li>Distance: <?php echo $this->escape($row['distance']);?>m</li>
+<?php endforeach; ?>
+</ul>
+
+<?php endif; ?>

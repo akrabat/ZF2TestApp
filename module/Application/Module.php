@@ -37,7 +37,13 @@ class Module implements AutoloaderProvider
     public function onBootstrap($e)
     {
         $application = $e->getParam('application');
-        $application->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
+        $locator      = $application->getLocator();
+        $view         = $locator->get('Zend\View\View');
+        $jsonStrategy = $locator->get(
+                     'Zend\View\Strategy\JsonStrategy');
+        $view->events()->attach($jsonStrategy, 100);        
+        // $application = $e->getParam('application');
+        // $application->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
 
     }
 
