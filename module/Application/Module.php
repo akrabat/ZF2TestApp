@@ -59,16 +59,15 @@ class Module implements AutoloaderProvider
         $renderer->doctype()->setDoctype('HTML5');
         $renderer->plugin('basePath')->setBasePath($basePath);
 
-        // // We can get at the view model here if we need to use logic to set
-        // // the layout template for instance by doing this:
+        // We can get at the view model here for the layout if we need to use 
+        // logic to set the layout template for instance by doing this:
         // $viewModel = $application->getMvcEvent()->getViewModel();
         // $viewModel->setTemplate('layout/layout');
 
-        $config      = $e->getParam('config');
-        $container = $renderer->placeholder('view_config');
-        foreach ($config->view as $var => $value) {
-            $container->{$var} = $value;
-        }
+        // Store "layout" config to the layout view model.
+        $config    = $e->getParam('config');
+        $viewModel = $application->getMvcEvent()->getViewModel();
+        $viewModel->config = $config->layout;
     }
 
     public function registerJsonStrategy($e)

@@ -1,6 +1,8 @@
 <?php
 return array(
-    'view' => array(),
+    'layout' => array(
+        'google_search_api_key' => '1234567890',
+    ),
     
     // DI setup 
     'di' => array(
