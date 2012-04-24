@@ -73,9 +73,8 @@ return array(
                         'default' => array(
                             'type'    => 'Zend\Mvc\Router\Http\Segment',
                             'options' => array(
-                                'route'    => '/[:controller[/:action]]',
+                                'route'    => '/index/:action',
                                 'constraints' => array(
-                                    'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                     'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 ),
                                 'defaults' => array(
