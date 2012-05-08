@@ -12,7 +12,7 @@ return array(
             ),
 
             // Setup the 'simple' route
-            'Zend\Mvc\Router\RouteStack' => array(
+            'Zend\Mvc\Router\RouteStackInterface' => array(
                 'parameters' => array(
                     'routes' => array(
                         'simple' => array(
