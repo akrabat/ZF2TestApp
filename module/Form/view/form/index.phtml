@@ -1,0 +1,54 @@
+<h2>A Form</h2>
+
+<p>This is a form!</p>
+
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('form'));
+
+echo $this->form()->openTag($form);
+?>
+<dl class="zend_form">
+<?php echo $this->formInput($form->get('one')); ?>
+<dt><?php echo $this->formLabel($form->get('two')); ?></dt>
+<dd><?php 
+    echo $this->formInput($form->get('two'));
+    echo $this->formElementErrors($form->get('two'));
+?></dd>
+<dt><?php echo $this->formLabel($form->get('three')); ?></dt>
+<dd><?php 
+    echo $this->formTextarea($form->get('three'));
+    echo $this->formElementErrors($form->get('three'));
+?></dd>
+
+<dt><?php echo $this->formLabel($form->get('four')); ?></dt>
+<dd><?php 
+    echo $this->formMultiCheckbox($form->get('four'));
+    echo $this->formElementErrors($form->get('four'));
+?></dd>
+
+<dt><?php echo $this->formLabel($form->get('five')); ?></dt>
+<dd><?php 
+    echo $this->formRadio($form->get('five'));
+    echo $this->formElementErrors($form->get('five'));
+?></dd>
+
+<dt><?php echo $this->formLabel($form->get('six')); ?></dt>
+<dd><?php 
+    echo $this->formSelect($form->get('six'));
+    echo $this->formElementErrors($form->get('six'));
+?></dd>
+
+<dt><?php echo $this->formLabel($form->get('seven')); ?></dt>
+<dd><?php echo $this->formCaptcha($form->get('seven')); 
+    echo $this->formElementErrors($form->get('seven'));
+?></dd>
+
+<dd><?php 
+    echo $this->formElement($form->get('csrf'));
+    echo $this->formInput($form->get('submit'));
+    echo $this->formElementErrors($form->get('submit'));
+?></dd>
+</dl>
+<?php echo $this->form()->closeTag($form); ?>
