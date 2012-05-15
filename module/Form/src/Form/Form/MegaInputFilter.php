@@ -13,8 +13,8 @@ class MegaInputFilter extends InputFilter
         $factory = new InputFactory();
 
         $this->add($factory->createInput(array(
-            'name'       => 'one',
+            'name'       => 'two',
             'required'   => true,
-        )));    
- }
+        )));
+    }
 }

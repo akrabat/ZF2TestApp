@@ -22,6 +22,7 @@ class FormController extends ActionController
             if ($form->isValid())
             {
                 // success
+                die('test');
             }
         }
 

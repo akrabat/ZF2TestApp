@@ -50,6 +50,7 @@ class Mega extends Form
                     'one' => '1',
                     'two' => '2',
                 ),
+                //'id' => 'id4',
             ),
         ));
 
@@ -63,6 +64,7 @@ class Mega extends Form
                     'one' => '1',
                     'two' => '2',
                 ),
+                //'id' => 'id5',
 
             ),
         ));
@@ -86,7 +88,7 @@ class Mega extends Form
         $captcha->setAttribute('label', 'Seven');
         $this->add($captcha);
 
-        // // Csrf
+        // Csrf
         $this->add(new Element\Csrf('csrf'));
 
         // Submit button

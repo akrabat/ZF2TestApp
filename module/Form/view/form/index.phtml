@@ -41,12 +41,16 @@ echo $this->form()->openTag($form);
 ?></dd>
 
 <dt><?php echo $this->formLabel($form->get('seven')); ?></dt>
-<dd><?php echo $this->formCaptcha($form->get('seven')); 
+<dd><?php 
+    echo $this->formCaptcha($form->get('seven')); 
     echo $this->formElementErrors($form->get('seven'));
 ?></dd>
 
+
 <dd><?php 
     echo $this->formElement($form->get('csrf'));
+    echo $this->formElementErrors($form->get('csrf'));
+
     echo $this->formInput($form->get('submit'));
     echo $this->formElementErrors($form->get('submit'));
 ?></dd>
