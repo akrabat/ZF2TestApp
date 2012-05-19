@@ -43,7 +43,7 @@ class ViewController extends ActionController
         // Use a different view script
         
         $viewModel = new ViewModel();
-        $viewModel->setTemplate('view/arbitrary');
+        $viewModel->setTemplate('application/view/arbitrary');
         return $viewModel;
     }
 
@@ -73,14 +73,14 @@ class ViewController extends ActionController
 
         // set up action view model and associated child view models
         $result = new ViewModel();
-        $result->setTemplate('view/another-action');
+        $result->setTemplate('application/view/another-action');
 
         $comments = new ViewModel();
-        $comments->setTemplate('view/child-comments');
+        $comments->setTemplate('application/view/child-comments');
         $result->addChild($comments, 'child_comments');
 
         $comments = new ViewModel();
-        $comments->setTemplate('view/another-child');
+        $comments->setTemplate('application/view/another-child');
         $result->addChild($comments, 'another_child');
 
         return $result;
