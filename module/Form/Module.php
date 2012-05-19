@@ -2,12 +2,9 @@
 
 namespace Form;
 
-use Zend\EventManager\Event,
-    Zend\Module\Consumer\AutoloaderProvider,
-    Zend\Module\Consumer\BootstrapListenerInterface,
-    Zend\Form\View\HelperLoader as FormHelperLoader;
+use Zend\Form\View\HelperLoader as FormHelperLoader;
 
-class Module implements AutoloaderProvider, BootstrapListenerInterface
+class Module
 {
     public function getAutoloaderConfig()
     {
@@ -25,27 +22,20 @@ class Module implements AutoloaderProvider, BootstrapListenerInterface
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function onBootstrap(Event $e)
+    public function onBootstrap($e)
     {
-        $application = $e->getParam('application');
-        $locator     = $application->getLocator();
-        $this->helperLoader = $locator->get('Zend\View\HelperLoader');
-
-        $application->events()->attach('route', array($this, 'onRouteFinish'));
+        $application        = $e->getParam('application');
+        $sharedEventManager = $application->events()->getSharedManager();
+        $sharedEventManager->attach(__NAMESPACE__, 'dispatch', array($this, 'onModuleDispatched'));
     }
 
-    public function onRouteFinish($e)
+    public function onModuleDispatched($e)
     {
-        $matches    = $e->getRouteMatch();
-        $controller = $matches->getParam('controller');
-        $namespace  = substr($controller, 0, strpos($controller, '\\'));
+        $application    = $e->getParam('application');
+        $serviceManager = $application->getServiceManager();
+        $helperLoader   = $serviceManager->get('Zend\View\HelperLoader');
 
-        if ($namespace !== __NAMESPACE__) {
-            return;
-        }
-        
-        // only register form view helpers for this namespace
-        $this->helperLoader->registerPlugins(new FormHelperLoader());
+        $helperLoader->registerPlugins(new FormHelperLoader());
     }
 
 

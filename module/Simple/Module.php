@@ -2,19 +2,10 @@
 
 namespace Simple;
 
-use Zend\Module\Manager,
-    Zend\EventManager\Event,
-    Zend\EventManager\StaticEventManager,
-    Zend\Module\Consumer\AutoloaderProvider;
+use Zend\Mvc\MvcEvent;
 
-class Module implements AutoloaderProvider
+class Module
 {
-    public function init(Manager $moduleManager)
-    {
-        $sharedEvents = $moduleManager->events()->getSharedManager();
-        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'onBootstrap'));
-    }
-
     public function getAutoloaderConfig()
     {
         return array(
@@ -34,22 +25,16 @@ class Module implements AutoloaderProvider
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function onBootstrap(Event $e)
+    public function onBootstrap(MvcEvent $e)
     {
-        $app = $e->getParam('application');
-        $app->events()->attach('dispatch', array($this, 'onDispatch'), -100);
+        $application        = $e->getParam('application');
+        $sharedEventManager = $application->events()->getSharedManager();
+        $sharedEventManager->attach(__NAMESPACE__, 'dispatch', array($this, 'onModuleDispatched'));
     }
 
-    public function onDispatch($e)
+    public function onModuleDispatched($e)
     {
-        $matches    = $e->getRouteMatch();
-        $controller = $matches->getParam('controller');
-        if (strpos($controller, __NAMESPACE__) !== 0) {
-            // not a controller from this module
-            return;
-        }
-
-        // Do module specific bootstrapping here
+        // This is only called if a controller within our module has been dispatched
 
         // Set the layout template for every action in this module
         $viewModel = $e->getViewModel();

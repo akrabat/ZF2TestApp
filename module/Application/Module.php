@@ -2,19 +2,11 @@
 
 namespace Application;
 
-use Zend\Module\Manager,
-    Zend\EventManager\StaticEventManager,
-    Zend\Module\Consumer\AutoloaderProvider;
+use Zend\ModuleManager\ModuleManager,
+    Zend\EventManager\StaticEventManager;
 
-class Module implements AutoloaderProvider
+class Module
 {
-    public function init(Manager $moduleManager)
-    {
-        $sharedEvents = $moduleManager->events()->getSharedManager();
-        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'initializeView'), 100);
-        $sharedEvents->attach('bootstrap', 'bootstrap', array($this, 'onBootstrap'));
-    }
-
     public function getAutoloaderConfig()
     {
         return array(
@@ -36,50 +28,17 @@ class Module implements AutoloaderProvider
     
     public function onBootstrap($e)
     {
-        $application = $e->getParam('application');
-        $locator      = $application->getLocator();
-        $view         = $locator->get('Zend\View\View');
-        $jsonStrategy = $locator->get(
-                     'Zend\View\Strategy\JsonStrategy');
-        $view->events()->attach($jsonStrategy, 100);        
-        // $application = $e->getParam('application');
-        // $application->events()->attach('render', array($this, 'registerJsonStrategy'), 100);
-
-    }
-
-    public function initializeView($e)
-    {
-        $application  = $e->getParam('application');
-        $basePath     = $application->getRequest()->getBasePath();
-        $locator      = $application->getLocator();
-        $renderer     = $locator->get('Zend\View\Renderer\PhpRenderer');
-
-        $renderer->doctype('HTML5');
-        $renderer->plugin('url')->setRouter($application->getRouter());
-        $renderer->doctype()->setDoctype('HTML5');
-        $renderer->plugin('basePath')->setBasePath($basePath);
-
-        // We can get at the view model here for the layout if we need to use 
-        // logic to set the layout template for instance by doing this:
-        // $viewModel = $application->getMvcEvent()->getViewModel();
-        // $viewModel->setTemplate('layout/layout');
+        $application    = $e->getParam('application');
+        $serviceManager = $application->getServiceManager();
+        $view           = $serviceManager->get('Zend\View\View');
+        // $jsonStrategy   = $serviceManager->get('Zend\View\Strategy\JsonStrategy');
+        // $view->events()->attach($jsonStrategy, 100);        
 
         // Store "layout" config to the layout view model.
-        $config    = $e->getParam('config');
+        $config    = $serviceManager->get('config');
         $viewModel = $application->getMvcEvent()->getViewModel();
-        $viewModel->config = $config->layout;
+        $viewModel->config = $config->layout;        
+
     }
-
-    public function registerJsonStrategy($e)
-    {
-        $application  = $e->getTarget();
-        $locator      = $application->getLocator();
-        $view         = $locator->get('Zend\View\View');
-        $jsonStrategy = $locator->get('Zend\View\Strategy\JsonStrategy');
-
-        // Attach strategy, which is a listener aggregate, at high priority
-        $view->events()->attach($jsonStrategy, 100);
-    }    
-
 
 }
