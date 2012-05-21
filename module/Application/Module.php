@@ -30,11 +30,6 @@ class Module
     {
         $application    = $e->getParam('application');
         $serviceManager = $application->getServiceManager();
-        // $serviceManager->get('ViewJsonStrategy');
-
-        // $view         = $serviceManager->get('View');
-        // $jsonStrategy = $serviceManager->get('ViewJsonStrategy');
-        // $view->events()->attach($jsonStrategy, 100);        
 
         // Store "layout" config to the layout view model.
         $config    = $serviceManager->get('config');
