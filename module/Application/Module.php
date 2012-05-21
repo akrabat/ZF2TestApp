@@ -30,8 +30,10 @@ class Module
     {
         $application    = $e->getParam('application');
         $serviceManager = $application->getServiceManager();
-        $view           = $serviceManager->get('Zend\View\View');
-        // $jsonStrategy   = $serviceManager->get('Zend\View\Strategy\JsonStrategy');
+        // $serviceManager->get('ViewJsonStrategy');
+
+        // $view         = $serviceManager->get('View');
+        // $jsonStrategy = $serviceManager->get('ViewJsonStrategy');
         // $view->events()->attach($jsonStrategy, 100);        
 
         // Store "layout" config to the layout view model.
@@ -40,5 +42,4 @@ class Module
         $viewModel->config = $config->layout;        
 
     }
-
 }
